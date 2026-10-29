@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAI | AI, software and design by Shehram Ali</title>
+<meta name="description" content="KAI builds websites, web portals, Android apps and functional AI applications. Founded by Shehram Ali.">
+<meta name="theme-color" content="#050914">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23050914'/%3E%3Ccircle cx='50' cy='50' r='26' fill='none' stroke='%2319e3ff' stroke-width='9'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Manrope:wght@400;500;700&display=swap">
+<style>
+:root{--ink:#050914;--navy:#0a1330;--panel:#0c1838;--line:#1b2c5e;--blue:#2f6bff;--cyan:#19e3ff;--text:#e6edff;--mute:#93a4cc;--r:14px;
+--head:"Sora","Segoe UI",system-ui,sans-serif;--body:"Manrope","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--ink);color:var(--text);font:400 1.02rem/1.65 var(--body);overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--head);line-height:1.12;letter-spacing:-.02em}
+h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:.6rem}
+h3{font-size:1.15rem}
+p.lead{color:var(--mute);max-width:62ch}
+.wrap{width:min(1120px,92%);margin-inline:auto}
+section{padding:96px 0;position:relative}
+.alt{background:linear-gradient(180deg,var(--navy),var(--ink))}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.35rem;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--text);font:600 .95rem var(--body);cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s}
+.btn:hover{transform:translateY(-2px);border-color:var(--cyan)}
+.btn.pri{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#04101f;border:0;box-shadow:0 8px 30px -8px var(--blue)}
+.btn.sm{padding:.45rem .9rem;font-size:.85rem}
+/* nav */
+header{position:fixed;inset:0 0 auto;z-index:50;backdrop-filter:blur(14px);background:rgba(5,9,20,.72);border-bottom:1px solid rgba(27,44,94,.6)}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:.6rem;font:700 1.2rem var(--head);text-decoration:none;letter-spacing:.06em}
+.brand svg{width:34px;height:34px}
+.menu{display:flex;gap:1.4rem;list-style:none;padding:0}
+.menu a{text-decoration:none;color:var(--mute);font-weight:500;font-size:.93rem;transition:color .2s}
+.menu a:hover{color:var(--cyan)}
+.burger{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:.45rem .7rem;font:600 .9rem var(--body);cursor:pointer}
+/* hero */
+#hero{min-height:100svh;display:flex;align-items:center;padding:110px 0 70px;overflow:hidden}
+#net{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+#hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:2rem;align-items:center}
+#hero h1{font-size:clamp(2.4rem,6vw,4.6rem);margin-bottom:1.1rem}
+#hero h1 span{background:linear-gradient(100deg,var(--cyan),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.8rem}
+.stage{display:grid;place-items:center;perspective:900px}
+#iris{width:min(420px,80vw);filter:drop-shadow(0 0 40px rgba(47,107,255,.45));transition:transform .15s ease-out}
+#iris .ring{transform-origin:100px 100px;animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.in{opacity:0;transform:translateY(18px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+.in:nth-child(2){animation-delay:.12s}.in:nth-child(3){animation-delay:.24s}.in:nth-child(4){animation-delay:.36s}
+@keyframes rise{to{opacity:1;transform:none}}
+/* about */
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem;align-items:center}
+.photo{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line);aspect-ratio:1;background:var(--panel);box-shadow:0 0 60px -20px var(--blue)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.mono{position:absolute;inset:0;display:none;place-items:center;font:700 4rem var(--head);color:var(--cyan)}
+.about p{margin-top:1rem;color:var(--mute)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+.chip{border:1px solid var(--line);border-radius:999px;padding:.25rem .8rem;font-size:.85rem;color:var(--cyan)}
+/* cards */
+.grid{display:grid;gap:1.1rem;margin-top:2.2rem}
+.g3{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.card{background:linear-gradient(160deg,var(--panel),#091126);border:1px solid var(--line);border-radius:var(--r);padding:1.4rem;display:flex;flex-direction:column;gap:.7rem;transition:border-color .25s,transform .25s}
+.card:hover{border-color:var(--blue);transform:translateY(-3px)}
+.card p{color:var(--mute);font-size:.95rem;flex:1}
+.card .ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:rgba(47,107,255,.16);color:var(--cyan);font:700 1rem var(--head)}
+/* projects */
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.6rem}
+.filters button{background:none;border:1px solid var(--line);color:var(--mute);border-radius:999px;padding:.4rem 1rem;font:500 .9rem var(--body);cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff}
+.badge{align-self:flex-start;font-size:.78rem;padding:.15rem .7rem;border-radius:999px;border:1px solid var(--line);color:var(--mute)}
+.badge.real{color:#04101f;background:var(--cyan);border:0;font-weight:700}
+.card.feat{border-color:var(--cyan);box-shadow:0 0 40px -18px var(--cyan)}
+/* process */
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.1rem;margin-top:2.2rem}
+.step{border-left:2px solid var(--blue);padding:.2rem 0 .2rem 1.2rem}
+.step::before{counter-increment:s;content:counter(s);font:700 1.9rem var(--head);color:var(--cyan)}
+.step p{color:var(--mute);font-size:.95rem}
+/* stack */
+.stack{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
+.stack span{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.6rem 1.1rem;font-weight:600}
+/* contact */
+.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:2.5rem;margin-top:2rem}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;justify-content:space-between;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:1rem 1.2rem;margin-bottom:.9rem}
+.row b{display:block;font-family:var(--head)}
+.row small{color:var(--mute)}
+.acts{display:flex;gap:.5rem}
+form{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:1.5rem;display:grid;gap:1rem}
+label{display:grid;gap:.35rem;font-weight:600;font-size:.92rem}
+input,select,textarea{background:var(--ink);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:.7rem .9rem;font:inherit}
+input[aria-invalid=true],select[aria-invalid=true],textarea[aria-invalid=true]{border-color:#ff6b7a}
+.err{color:#ff8a96;font-size:.82rem;min-height:1em;font-weight:400}
+.note{font-size:.85rem;color:var(--mute);border-left:2px solid var(--cyan);padding-left:.8rem}
+#status{min-height:1.4em;color:var(--cyan);font-size:.92rem}
+/* faq */
+.faq{max-width:780px;margin-top:2rem}
+.faq .q{width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);color:var(--text);font:600 1.05rem var(--head);padding:1.1rem 2rem 1.1rem 0;cursor:pointer;position:relative}
+.faq .q::after{content:"+";position:absolute;right:.2rem;color:var(--cyan);transition:transform .25s}
+.faq .q[aria-expanded=true]::after{transform:rotate(45deg)}
+.faq .a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s}
+.faq .a.open{grid-template-rows:1fr}
+.faq .a div{overflow:hidden;color:var(--mute)}
+.faq .a p{padding:.9rem 0 .3rem}
+/* modal */
+dialog{margin:auto;max-width:min(620px,92vw);width:100%;background:var(--panel);color:var(--text);border:1px solid var(--cyan);border-radius:18px;padding:1.8rem;box-shadow:0 0 80px -20px var(--blue)}
+dialog::backdrop{background:rgba(2,5,14,.8);backdrop-filter:blur(4px)}
+dialog ul{margin:1rem 0 1.4rem 1.2rem;color:var(--mute)}
+dialog .x{float:right}
+footer{border-top:1px solid var(--line);padding:2.5rem 0;color:var(--mute);font-size:.92rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+#toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,40px);background:var(--cyan);color:#04101f;padding:.6rem 1.2rem;border-radius:999px;font-weight:700;opacity:0;pointer-events:none;transition:.3s;z-index:99}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:860px){
+ .burger{display:block}
+ .menu{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--ink);border-bottom:1px solid var(--line);padding:.5rem 4%}
+ .menu.open{display:flex}.menu a{display:block;padding:.8rem 0}
+ #hero .wrap,.about,.contact{grid-template-columns:1fr}
+ .stage{order:-1}#iris{width:min(240px,60vw)}
+ section{padding:70px 0}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ .in{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#19e3ff"/><stop offset="1" stop-color="#2f6bff"/></linearGradient>
+<path id="blade" d="M100 8C152 16 190 68 174 124C152 84 122 58 100 52Z"/>
+</defs></svg>
+
+<header><div class="wrap"><nav aria-label="Main">
+ <a class="brand" href="#hero" aria-label="KAI home"><svg viewBox="0 0 200 200" aria-hidden="true"><g fill="none" stroke="url(#g)" stroke-width="9"><use href="#blade"/><use href="#blade" transform="rotate(60 100 100)"/><use href="#blade" transform="rotate(120 100 100)"/><use href="#blade" transform="rotate(180 100 100)"/><use href="#blade" transform="rotate(240 100 100)"/><use href="#blade" transform="rotate(300 100 100)"/></g></svg>KAI</a>
+ <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
+ <ul class="menu" id="menu">
+  <li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#projects">Projects</a></li>
+  <li><a href="#process">Process</a></li><li><a href="#why">Why KAI</a></li><li><a href="#stack">Stack</a></li>
+  <li><a href="#contact">Contact</a></li><li><a href="#faq">FAQ</a></li>
+ </ul></nav></div></header>
+
+<main>
+<section id="hero"><canvas id="net" aria-hidden="true"></canvas>
+ <div class="wrap">
+  <div>
+   <p class="in chip" style="display:inline-block">Founded by Shehram Ali</p>
+   <h1 class="in">Software and AI that <span>does real work.</span></h1>
+   <p class="in lead">KAI designs and builds websites, web portals, small Android apps and AI applications that connect to the latest AI models. One student founder, hands-on from first sketch to launch.</p>
+   <div class="in cta"><a class="btn pri" data-wa="Hi Shehram, I found KAI and want to discuss a project." target="_blank" rel="noopener">Message on WhatsApp</a><a class="btn" href="#projects">See projects</a></div>
+  </div>
+  <div class="stage"><svg id="iris" viewBox="0 0 200 200" role="img" aria-label="KAI iris logo"><g class="ring" fill="rgba(47,107,255,.18)" stroke="url(#g)" stroke-width="3"><use href="#blade"/><use href="#blade" transform="rotate(60 100 100)"/><use href="#blade" transform="rotate(120 100 100)"/><use href="#blade" transform="rotate(180 100 100)"/><use href="#blade" transform="rotate(240 100 100)"/><use href="#blade" transform="rotate(300 100 100)"/></g><circle cx="100" cy="100" r="16" fill="none" stroke="#19e3ff" stroke-width="2" opacity=".7"/></svg></div>
+ </div></section>
+
+<section id="about" class="alt"><div class="wrap about">
+ <div class="photo"><img src="assets/founder.jpg" alt="Shehram Ali, founder of KAI" id="fimg"><div class="mono" id="fmono" aria-hidden="true">SA</div></div>
+ <div><h2>Built by a student who ships.</h2>
+  <p>I’m Shehram Ali, a computer science student and the founder of KAI. I build AI and software solutions for people and small businesses who need something that works, not a slide deck about it.</p>
+  <p>KAI is a young studio. I would rather show you a real project and clearly labelled concepts than inflate a track record. You work directly with me on every build.</p>
+  <div class="chips"><span class="chip">Computer science student</span><span class="chip">AI applications</span><span class="chip">Web and Android</span></div></div>
+</div></section>
+
+<section id="services"><div class="wrap"><h2>What KAI builds</h2><p class="lead">Pick a service and the inquiry form fills in for you.</p><div class="grid g3" id="svc"></div></div></section>
+
+<section id="projects" class="alt"><div class="wrap"><h2>Projects</h2>
+ <p class="lead">MAXX AI is a real KAI project. Everything else is a concept: an example of what we can build, not delivered client work.</p>
+ <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
+ <div class="grid g3" id="pgrid"></div></div></section>
+
+<section id="process"><div class="wrap"><h2>How a project runs</h2><p class="lead">Four steps, in order. You see progress at each one.</p>
+ <div class="steps">
+  <div class="step"><h3>Talk</h3><p>You tell me the goal and who it is for. We agree scope and what “done” means.</p></div>
+  <div class="step"><h3>Design</h3><p>Wireframes and a visual direction you can react to before any code is written.</p></div>
+  <div class="step"><h3>Build</h3><p>I build in small pieces and share working previews so you can steer early.</p></div>
+  <div class="step"><h3>Launch</h3><p>We test on real devices, fix what breaks, then hand over the finished work.</p></div>
+ </div></div></section>
+
+<section id="why" class="alt"><div class="wrap"><h2>Why work with KAI</h2>
+ <div class="grid g3">
+  <div class="card"><h3>Direct access</h3><p>You talk to the person building your product. No account managers, no relays.</p></div>
+  <div class="card"><h3>Honest scope</h3><p>If something is not a good fit or needs a backend you have not budgeted for, I say so up front.</p></div>
+  <div class="card"><h3>Current AI tools</h3><p>Integrations use up-to-date AI model APIs, with keys kept on the server side, never in page code.</p></div>
+  <div class="card"><h3>Looks and works</h3><p>Design and engineering come from one person, so the interface and the logic fit together.</p></div>
+ </div></div></section>
+
+<section id="stack"><div class="wrap"><h2>Technology we use</h2><p class="lead">A typical toolkit. The exact stack depends on what your project needs.</p>
+ <div class="stack"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Android</span><span>AI model APIs</span><span>Responsive design</span><span>UI/UX prototyping</span></div></div></section>
+
+<section id="contact" class="alt"><div class="wrap"><h2>Start a conversation</h2><p class="lead">WhatsApp is the fastest way to reach me. Email works too.</p>
+ <div class="contact">
+  <div>
+   <div class="row"><div><b>WhatsApp</b><small>+92 3000-1650000</small></div><div class="acts"><a class="btn sm pri" data-wa="Hi Shehram, I would like to talk about a project." target="_blank" rel="noopener">Open chat</a><button class="btn sm" data-copy="+92 3000-1650000">Copy</button></div></div>
+   <div class="row"><div><b>Email</b><small>shehram279@gmail.com</small></div><div class="acts"><a class="btn sm pri" href="mailto:shehram279@gmail.com">Write email</a><button class="btn sm" data-copy="shehram279@gmail.com">Copy</button></div></div>
+  </div>
+  <form id="form" novalidate>
+   <label>Your name<input id="f-name" autocomplete="name"><span class="err" id="e-name"></span></label>
+   <label>Your email<input id="f-email" type="email" autocomplete="email"><span class="err" id="e-email"></span></label>
+   <label>Service<select id="f-svc"><option value="">Choose a service</option></select><span class="err" id="e-svc"></span></label>
+   <label>What do you need?<textarea id="f-msg" rows="4"></textarea><span class="err" id="e-msg"></span></label>
+   <p class="note">No backend is connected to this site. Sending opens your own email app with the message filled in; nothing is delivered until you press send there.</p>
+   <button class="btn pri" type="submit">Open email draft</button>
+   <p id="status" role="status" aria-live="polite"></p>
+  </form>
+ </div></div></section>
+
+<section id="faq"><div class="wrap"><h2>Questions</h2><div class="faq" id="faqbox"></div></div></section>
+</main>
+
+<footer><div class="wrap"><span><b style="font-family:var(--head)">KAI</b> · Founded by Shehram Ali</span><span><a href="mailto:shehram279@gmail.com">shehram279@gmail.com</a> · <a data-wa="Hi Shehram, I have a question about KAI." target="_blank" rel="noopener">WhatsApp</a> · <a href="#hero">Back to top</a></span></div></footer>
+
+<dialog id="dlg" aria-labelledby="dt"><button class="btn sm x" id="dx" aria-label="Close details">Close</button><span class="badge" id="db"></span><h3 id="dt" style="font-size:1.5rem;margin-top:.6rem"></h3><p id="dd" style="color:var(--mute);margin-top:.6rem"></p><ul id="dl"></ul><div class="acts"><a class="btn pri" id="dwa" target="_blank" rel="noopener">Ask about this</a></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+var WA="9230001650000",MAIL="shehram279@gmail.com";
+var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var $=function(s,r){return(r||document).querySelector(s)};
+function wa(t){return"https://wa.me/"+WA+"?text="+encodeURIComponent(t)}
+document.querySelectorAll("[data-wa]").forEach(function(a){a.href=wa(a.getAttribute("data-wa"))});
+
+/* toast + copy */
+var tt;function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("on")},2000)}
+function copy(txt){
+ if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(function(){toast("Copied")},function(){fb()})}else fb();
+ function fb(){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();
+  var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(ta);toast(ok?"Copied":"Copy failed. Select the text manually.")}
+}
+document.querySelectorAll("[data-copy]").forEach(function(b){b.addEventListener("click",function(){copy(b.getAttribute("data-copy"))})});
+
+/* nav */
+var burger=$("#burger"),menu=$("#menu");
+burger.addEventListener("click",function(){var o=menu.classList.toggle("open");burger.setAttribute("aria-expanded",o)});
+menu.addEventListener("click",function(e){if(e.target.tagName==="A"){menu.classList.remove("open");burger.setAttribute("aria-expanded","false")}});
+
+/* founder image fallback */
+var fi=$("#fimg");fi.addEventListener("error",function(){fi.style.display="none";$("#fmono").style.display="grid"});
+
+/* data */
+var SERVICES=[
+["UI/UX design","Clear interfaces and prototypes, designed around how people actually use them.","U"],
+["Websites","Fast, responsive sites that present your work or business well.","W"],
+["Web portals","Logins, dashboards and data screens for teams or customers.","P"],
+["Small Android apps / APKs","Focused Android apps packaged as an APK you can install and test.","A"],
+["Functional AI applications","Apps where AI does a specific job: answer, summarise, classify, assist.","AI"],
+["Latest AI model API integration","Connect your product to current AI model APIs, with keys handled safely server-side.","API"],
+["Customized AI solutions","AI workflows shaped to your own content, tasks and constraints.","C"],
+["Custom websites","Built from scratch to your brand, no template look.","S"]];
+var PROJECTS=[
+{t:"MAXX AI",k:"real",c:["ai","web"],s:"A functional AI application built by KAI.",d:["This is a real project by KAI and Shehram Ali.","Ask on WhatsApp for a walkthrough of what it does and how it was built.","A public demo link has not been added to this page yet."]},
+{t:"Student portal",k:"concept",c:["web"],s:"A portal where students see timetables, notices and results.",d:["Concept: not a delivered client project.","Shows how a login-based web portal could be structured.","Would need a backend and database to go live."]},
+{t:"Clinic booking site",k:"concept",c:["web"],s:"A small-clinic website with services and an appointment request flow.",d:["Concept: not a delivered client project.","Demonstrates clean service pages and a request form.","Real bookings would need a backend."]},
+{t:"AI support assistant",k:"concept",c:["ai","web"],s:"A chat assistant that answers questions from a business’s own FAQ content.",d:["Concept: not a delivered client project.","Would call an AI model API from a secure server.","Answers would be limited to supplied content."]},
+{t:"Task tracker app",k:"concept",c:["mobile"],s:"A simple Android to-do and reminder app delivered as an APK.",d:["Concept: not a delivered client project.","Demonstrates a small, focused Android scope.","Would be tested on real devices before handover."]},
+{t:"Local shop website",k:"concept",c:["web"],s:"A custom website for a local shop with products, hours and WhatsApp ordering.",d:["Concept: not a delivered client project.","Shows how WhatsApp links can drive orders without a backend.","Fully responsive on phones."]}];
+var FILTERS=[["all","All"],["real","Real"],["concept","Concepts"],["web","Web"],["ai","AI"],["mobile","Mobile"]];
+var FAQ=[
+["How much does a project cost?","It depends on scope. Message me what you need and I will give a clear estimate before any work starts."],
+["How long does it take?","Small sites can take days; apps and AI applications take longer. I give a timeline once scope is agreed."],
+["Do you build Android apps?","Yes, small and focused apps, delivered as an APK you can install and test."],
+["Is my AI app safe to publish?","AI model keys must never sit in public page code. Projects that need AI use a server-side layer to keep keys private."],
+["Does this contact form send my message?","No backend is connected to this site. The form opens your email app with the message prefilled; you press send there. You can also use WhatsApp."],
+["Are the example projects real?","Only MAXX AI is a real project. The others are labelled concepts that show what KAI can build."]];
+
+/* services */
+var sel=$("#f-svc");
+SERVICES.forEach(function(s,i){
+ var c=document.createElement("article");c.className="card";
+ c.innerHTML='<div class="ic">'+s[2]+'</div><h3></h3><p></p>';
+ c.querySelector("h3").textContent=s[0];c.querySelector("p").textContent=s[1];
+ var b=document.createElement("button");b.className="btn sm";b.type="button";b.textContent="Inquire about this";
+ b.addEventListener("click",function(){sel.value=s[0];clearErr(sel);var f=$("#contact");f.scrollIntoView({behavior:reduce?"auto":"smooth"});setTimeout(function(){$("#f-name").focus({preventScroll:true})},reduce?0:500)});
+ c.appendChild(b);$("#svc").appendChild(c);
+ var o=document.createElement("option");o.value=s[0];o.textContent=s[0];sel.appendChild(o);
+});
+var og=document.createElement("option");og.value="Something else";og.textContent="Something else";sel.appendChild(og);
+
+/* projects */
+var cur="all",dlg=$("#dlg"),lastBtn=null;
+function renderFilters(){var f=$("#filters");f.innerHTML="";FILTERS.forEach(function(x){var b=document.createElement("button");b.type="button";b.textContent=x[1];b.setAttribute("aria-pressed",String(cur===x[0]));b.addEventListener("click",function(){cur=x[0];renderFilters();renderProjects()});f.appendChild(b)})}
+function renderProjects(){
+ var g=$("#pgrid");g.innerHTML="";
+ PROJECTS.filter(function(p){return cur==="all"||p.k===cur||p.c.indexOf(cur)>-1}).forEach(function(p){
+  var c=document.createElement("article");c.className="card"+(p.k==="real"?" feat":"");
+  var bd=document.createElement("span");bd.className="badge "+p.k;bd.textContent=p.k==="real"?"Real project":"Concept";
+  var h=document.createElement("h3");h.textContent=p.t;var pp=document.createElement("p");pp.textContent=p.s;
+  var b=document.createElement("button");b.className="btn sm";b.type="button";b.textContent="View details";
+  b.addEventListener("click",function(){openP(p,b)});
+  c.append(bd,h,pp,b);g.appendChild(c)});
+}
+function openP(p,btn){
+ lastBtn=btn;var b=$("#db");b.textContent=p.k==="real"?"Real project":"Concept";b.className="badge "+p.k;
+ $("#dt").textContent=p.t;$("#dd").textContent=p.s;var l=$("#dl");l.innerHTML="";
+ p.d.forEach(function(x){var li=document.createElement("li");li.textContent=x;l.appendChild(li)});
+ $("#dwa").href=wa("Hi Shehram, I would like to know more about "+p.t+" ("+(p.k==="real"?"real project":"concept")+").");
+ if(dlg.showModal)dlg.showModal();else dlg.setAttribute("open","");
+}
+$("#dx").addEventListener("click",function(){dlg.close()});
+dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
+dlg.addEventListener("close",function(){if(lastBtn)lastBtn.focus()});
+renderFilters();renderProjects();
+
+/* faq */
+FAQ.forEach(function(f,i){
+ var q=document.createElement("button");q.className="q";q.type="button";q.id="q"+i;q.setAttribute("aria-expanded","false");q.setAttribute("aria-controls","a"+i);q.textContent=f[0];
+ var a=document.createElement("div");a.className="a";a.id="a"+i;a.setAttribute("role","region");a.setAttribute("aria-labelledby","q"+i);
+ a.innerHTML="<div><p></p></div>";a.querySelector("p").textContent=f[1];
+ q.addEventListener("click",function(){var o=q.getAttribute("aria-expanded")==="true";
+  document.querySelectorAll(".faq .q").forEach(function(x){x.setAttribute("aria-expanded","false");x.nextElementSibling.classList.remove("open")});
+  if(!o){q.setAttribute("aria-expanded","true");a.classList.add("open")}});
+ $("#faqbox").append(q,a);
+});
+
+/* form */
+function setErr(el,id,m){el.setAttribute("aria-invalid","true");$("#"+id).textContent=m}
+function clearErr(el){el.removeAttribute("aria-invalid");var e=el.parentNode.querySelector(".err");if(e)e.textContent=""}
+["#f-name","#f-email","#f-svc","#f-msg"].forEach(function(s){$(s).addEventListener("input",function(){clearErr(this)})});
+$("#form").addEventListener("submit",function(e){
+ e.preventDefault();$("#status").textContent="";
+ var n=$("#f-name"),m=$("#f-email"),s=sel,g=$("#f-msg"),bad=null;
+ [n,m,s,g].forEach(clearErr);
+ if(n.value.trim().length<2){setErr(n,"e-name","Enter your name.");bad=bad||n}
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m.value.trim())){setErr(m,"e-email","Enter a valid email address.");bad=bad||m}
+ if(!s.value){setErr(s,"e-svc","Choose a service.");bad=bad||s}
+ if(g.value.trim().length<10){setErr(g,"e-msg","Write at least 10 characters about what you need.");bad=bad||g}
+ if(bad){bad.focus();return}
+ var body="Name: "+n.value.trim()+"\nReply-to: "+m.value.trim()+"\nService: "+s.value+"\n\n"+g.value.trim();
+ window.location.href="mailto:"+MAIL+"?subject="+encodeURIComponent("KAI inquiry: "+s.value)+"&body="+encodeURIComponent(body);
+ $("#status").textContent="Your email app should open with a draft. Nothing has been sent yet; press send there. If no app opened, copy "+MAIL+" and email it manually.";
+});
+
+/* hero net + iris tilt */
+var cv=$("#net"),cx=cv.getContext("2d"),pts=[],W,H,mx=-1e3,my=-1e3,raf;
+function size(){var d=Math.min(window.devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0);
+ var n=Math.min(70,Math.floor(W*H/16000));pts=[];for(var i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3})}
+function draw(){
+ cx.clearRect(0,0,W,H);
+ for(var i=0;i<pts.length;i++){var p=pts[i];
+  if(!reduce){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1}
+  cx.fillStyle="rgba(25,227,255,.7)";cx.beginPath();cx.arc(p.x,p.y,1.5,0,6.283);cx.fill();
+  for(var j=i+1;j<pts.length;j++){var q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=dx*dx+dy*dy;
+   if(d<14000){cx.strokeStyle="rgba(47,107,255,"+(.32*(1-d/14000))+")";cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.stroke()}}
+  var ex=p.x-mx,ey=p.y-my;if(ex*ex+ey*ey<22000){cx.strokeStyle="rgba(25,227,255,.5)";cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(mx,my);cx.stroke()}}
+ if(!reduce)raf=requestAnimationFrame(draw);
+}
+size();draw();
+window.addEventListener("resize",function(){size();if(reduce)draw()});
+document.addEventListener("visibilitychange",function(){if(reduce)return;if(document.hidden)cancelAnimationFrame(raf);else draw()});
+var hero=$("#hero"),iris=$("#iris");
+hero.addEventListener("pointermove",function(e){var r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;
+ if(!reduce){var x=(e.clientX/innerWidth-.5)*14,y=(e.clientY/innerHeight-.5)*-14;iris.style.transform="rotateY("+x+"deg) rotateX("+y+"deg)"}});
+hero.addEventListener("pointerleave",function(){mx=my=-1e3;iris.style.transform=""});
+})();
+</script>
+</body>
+</html>
